@@ -1,0 +1,199 @@
+<div class="min-h-screen bg-white font-body">
+
+  <%= render "shared/nav" %>
+
+  <div class="max-w-4xl mx-auto px-6 py-12">
+
+    <!-- Header -->
+    <div class="mb-10">
+      <p class="text-[11px] font-medium tracking-[0.2em] uppercase text-brand-400 mb-2">Practice</p>
+      <h1 class="text-3xl font-extralight tracking-tight text-slate-900">Train Your Hoard</h1>
+    </div>
+
+    <% if @languages.empty? && @stashes.empty? %>
+      <div class="text-center py-20">
+        <div class="w-16 h-16 mx-auto mb-5 rounded-2xl bg-brand-50 flex items-center justify-center">
+          <i class="fa-solid fa-dumbbell text-2xl text-brand-300"></i>
+        </div>
+        <h2 class="text-lg font-extralight text-slate-900 mb-2">Nothing to practice yet</h2>
+        <p class="text-sm font-extralight text-slate-400 mb-6 max-w-sm mx-auto">Add some words to your hoard first, then come back to train.</p>
+        <%= link_to words_path, class: "btn-gradient inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-brand-500 to-brand-600 text-white text-sm font-light rounded-lg" do %>
+          <i class="fa-solid fa-plus text-[10px] opacity-70"></i>
+          Go to My Hoard
+        <% end %>
+      </div>
+
+    <% else %>
+      <div class="grid sm:grid-cols-2 gap-6 mb-12">
+
+        <!-- By Language -->
+        <div>
+          <h2 class="text-[11px] font-medium tracking-wider uppercase text-slate-300 mb-3">
+            <i class="fa-solid fa-earth-americas text-[9px] mr-1"></i>By Language
+          </h2>
+          <div class="space-y-2">
+            <% @languages.each do |lang| %>
+              <% word_count = current_user.words.where(language_id: lang.id).count %>
+              <% if word_count > 0 %>
+                <%= button_to practice_index_path(language_id: lang.id), method: :post,
+                      class: "w-full text-left px-4 py-3 bg-white rounded-xl border border-slate-100 hover:border-brand-200 hover:shadow-sm transition-all group flex items-center justify-between" do %>
+                  <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-lg bg-slate-50 flex items-center justify-center text-lg">
+                      <%= flag_emoji(lang) %>
+                    </div>
+                    <div>
+                      <p class="text-sm font-light text-slate-800"><%= lang.name %></p>
+                      <p class="text-[10px] font-light text-slate-400"><%= word_count %> word<%= word_count == 1 ? '' : 's' %></p>
+                    </div>
+                  </div>
+                  <i class="fa-solid fa-play text-[10px] text-slate-300 group-hover:text-brand-400 transition-colors"></i>
+                <% end %>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+
+        <!-- By Stash -->
+        <div data-controller="stash-filter" data-stash-filter-page-size-value="8">
+          <h2 class="text-[11px] font-medium tracking-wider uppercase text-slate-300 mb-3">
+            <i class="fa-solid fa-box-archive text-[9px] mr-1"></i>By Stash
+            <span data-stash-filter-target="counter" class="ml-1 font-light normal-case tracking-normal text-slate-300"></span>
+          </h2>
+
+          <% if @stashes.empty? %>
+            <div class="px-4 py-6 bg-slate-50/50 rounded-xl border border-dashed border-slate-200 text-center">
+              <p class="text-xs font-light text-slate-400">No stashes yet. Create one when adding a word.</p>
+            </div>
+          <% else %>
+
+            <!-- Search -->
+            <div class="mb-3">
+              <div class="relative">
+                <i class="fa-solid fa-magnifying-glass text-[10px] text-slate-300 absolute left-3 top-1/2 -translate-y-1/2"></i>
+                <input type="text"
+                       data-stash-filter-target="search"
+                       data-action="input->stash-filter#onSearch"
+                       class="w-full pl-8 pr-3 py-2 text-sm font-light text-slate-600 bg-white border border-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-200 focus:border-brand-300 transition-all placeholder:text-slate-300"
+                       placeholder="Search stashes..." autocomplete="off" />
+              </div>
+            </div>
+
+            <!-- Language flag filters -->
+            <% all_lang_ids = @stash_languages.values.flatten(1).uniq { |l| l[0] } %>
+            <% if all_lang_ids.size > 1 %>
+              <div class="flex flex-wrap gap-1.5 mb-3">
+                <% all_lang_ids.sort_by { |l| l[2] }.each do |lang_id, lang_code, lang_name| %>
+                  <button type="button"
+                          data-stash-filter-target="langFilter"
+                          data-lang-id="<%= lang_id %>"
+                          data-action="click->stash-filter#toggleLang"
+                          class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-50 text-slate-500 text-[11px] font-light hover:bg-slate-100 transition-all cursor-pointer">
+                    <span class="text-sm"><%= flag_emoji(lang_code) %></span>
+                    <%= lang_name %>
+                  </button>
+                <% end %>
+              </div>
+            <% end %>
+
+            <!-- Stash list -->
+            <div class="space-y-2">
+              <% @stashes.each do |stash| %>
+                <% wc = stash.respond_to?(:words_count) ? stash.words_count : stash.words.count %>
+                <% stash_lang_ids = (@stash_languages[stash.id] || []).map { |l| l[0].to_s } %>
+                <% stash_lang_codes = (@stash_languages[stash.id] || []).map { |l| l[1] } %>
+                <div data-stash-filter-target="item"
+                     data-name="<%= stash.name %>"
+                     data-langs="<%= stash_lang_ids.join(",") %>">
+                  <%= button_to practice_index_path(stash_id: stash.id), method: :post,
+                        class: "w-full text-left px-4 py-3 bg-white rounded-xl border border-slate-100 hover:border-brand-200 hover:shadow-sm transition-all group flex items-center justify-between" do %>
+                    <div class="flex items-center gap-3">
+                      <div class="w-9 h-9 rounded-lg bg-slate-50 flex items-center justify-center text-base">
+                        <% if stash_lang_codes.size == 1 %>
+                          <%= flag_emoji(stash_lang_codes.first) %>
+                        <% elsif stash_lang_codes.size > 1 %>
+                          <span class="text-[11px]"><%= stash_lang_codes.first(2).map { |c| flag_emoji(c) }.join("") %></span>
+                        <% else %>
+                          <i class="fa-solid fa-box-archive text-sm text-brand-400"></i>
+                        <% end %>
+                      </div>
+                      <div>
+                        <p class="text-sm font-light text-slate-800"><%= stash.name %></p>
+                        <p class="text-[10px] font-light text-slate-400"><%= wc %> word<%= wc == 1 ? '' : 's' %></p>
+                      </div>
+                    </div>
+                    <i class="fa-solid fa-play text-[10px] text-slate-300 group-hover:text-brand-400 transition-colors"></i>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+
+            <!-- Show more -->
+            <div data-stash-filter-target="showMore" class="hidden mt-3 text-center">
+              <button type="button"
+                      data-action="click->stash-filter#showMoreItems"
+                      class="text-xs font-light text-brand-500 hover:text-brand-600 transition-colors">
+                Show more (<span data-remaining></span> remaining)
+              </button>
+            </div>
+
+          <% end %>
+        </div>
+
+      </div>
+
+      <!-- Recent sessions -->
+      <% if @recent_sessions.any? %>
+        <div>
+          <h2 class="text-[11px] font-medium tracking-wider uppercase text-slate-300 mb-3">
+            <i class="fa-solid fa-clock-rotate-left text-[9px] mr-1"></i>Recent Sessions
+          </h2>
+          <div class="bg-white rounded-xl border border-slate-100 overflow-hidden">
+            <table class="w-full">
+              <thead>
+                <tr class="border-b border-slate-50">
+                  <th class="text-[10px] font-medium tracking-wider uppercase text-slate-300 px-3 py-3 w-10"></th>
+                  <th class="text-left text-[10px] font-medium tracking-wider uppercase text-slate-300 px-3 py-3">Set</th>
+                  <th class="text-left text-[10px] font-medium tracking-wider uppercase text-slate-300 px-5 py-3">Words</th>
+                  <th class="text-left text-[10px] font-medium tracking-wider uppercase text-slate-300 px-5 py-3">First Try</th>
+                  <th class="text-left text-[10px] font-medium tracking-wider uppercase text-slate-300 px-5 py-3">Session</th>
+                  <th class="text-left text-[10px] font-medium tracking-wider uppercase text-slate-300 px-5 py-3 hidden sm:table-cell">Time</th>
+                  <th class="text-left text-[10px] font-medium tracking-wider uppercase text-slate-300 px-5 py-3 hidden sm:table-cell">Date</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-50">
+                <% @recent_sessions.each do |session| %>
+                  <tr class="hover:bg-slate-50/50 transition-colors">
+                    <td class="px-3 py-3 text-center text-lg">
+                      <%= session_flag(session) %>
+                    </td>
+                    <td class="px-3 py-3">
+                      <span class="text-sm font-light text-slate-700"><%= session.label %></span>
+                      <p class="text-[10px] font-light text-slate-400"><%= session.language_label %></p>
+                    </td>
+                    <td class="px-5 py-3">
+                      <span class="text-sm font-extralight text-slate-500"><%= session.words_seen %>/<%= session.total_words %></span>
+                    </td>
+                    <td class="px-5 py-3">
+                      <span class="text-sm font-light <%= session.accuracy >= 80 ? 'text-xp-green' : session.accuracy >= 50 ? 'text-reward-500' : 'text-red-400' %>"><%= session.accuracy %>%</span>
+                    </td>
+                    <td class="px-5 py-3">
+                      <span class="text-sm font-light <%= session.total_accuracy >= 80 ? 'text-xp-green' : session.total_accuracy >= 50 ? 'text-reward-500' : 'text-red-400' %>"><%= session.total_accuracy %>%</span>
+                    </td>
+                    <td class="px-5 py-3 hidden sm:table-cell">
+                      <span class="text-xs font-light text-slate-400"><%= session.duration_seconds ? "#{session.duration_seconds / 60}m #{session.duration_seconds % 60}s" : "—" %></span>
+                    </td>
+                    <td class="px-5 py-3 hidden sm:table-cell">
+                      <span class="text-xs font-light text-slate-400"><%= session.completed_at&.strftime("%b %-d") %></span>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      <% end %>
+
+    <% end %>
+
+  </div>
+</div>

@@ -1,0 +1,154 @@
+<div class="min-h-screen bg-white font-body">
+
+  <!-- Nav -->
+  <%= render "shared/nav" %>
+
+  <!-- Hero -->
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-brand-50 via-white to-reward-50/30"></div>
+    <div class="relative max-w-6xl mx-auto px-6 py-24 sm:py-36">
+      <p class="text-[11px] font-medium tracking-[0.2em] uppercase text-brand-400 mb-4">Language Learning, Reimagined</p>
+      <h1 class="text-5xl sm:text-7xl font-extralight tracking-tight text-slate-900 leading-[1.05] max-w-3xl">
+        Collect words.<br/>
+        <span class="text-brand-500">Own languages.</span>
+      </h1>
+      <p class="mt-6 text-lg font-extralight text-slate-400 max-w-lg leading-relaxed">
+        Build your personal vocabulary collection. Track mastery, earn XP, unlock achievements. Every word you learn is a word you keep.
+      </p>
+      <div class="mt-10 flex flex-col sm:flex-row gap-3">
+        <%= link_to new_user_registration_path, class: "btn-gradient inline-flex items-center justify-center gap-2 px-7 py-3 bg-gradient-to-r from-brand-500 to-brand-600 text-white text-sm font-light rounded-lg" do %>
+          <i class="fa-solid fa-plus text-xs opacity-70"></i>
+          Start Collecting — It's Free
+        <% end %>
+        <a href="#how-it-works" class="btn-lift inline-flex items-center justify-center gap-2 px-7 py-3 bg-white text-slate-600 text-sm font-light rounded-lg border border-slate-200 hover:border-slate-300 hover:text-slate-900">
+          <i class="fa-regular fa-circle-play text-xs opacity-50"></i>
+          How It Works
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Social proof -->
+  <section class="border-y border-slate-100 bg-slate-50/30">
+    <div class="max-w-6xl mx-auto px-6 py-6 flex flex-wrap items-center justify-center gap-8 sm:gap-16">
+      <div class="text-center">
+        <p class="text-2xl font-extralight text-slate-900">12k+</p>
+        <p class="text-[10px] font-medium tracking-wider uppercase text-slate-300 mt-0.5">Collectors</p>
+      </div>
+      <div class="text-center">
+        <p class="text-2xl font-extralight text-slate-900">847k</p>
+        <p class="text-[10px] font-medium tracking-wider uppercase text-slate-300 mt-0.5">Words Collected</p>
+      </div>
+      <div class="text-center">
+        <p class="text-2xl font-extralight text-slate-900">42</p>
+        <p class="text-[10px] font-medium tracking-wider uppercase text-slate-300 mt-0.5">Languages</p>
+      </div>
+      <div class="text-center">
+        <p class="text-2xl font-extralight text-slate-900">96%</p>
+        <p class="text-[10px] font-medium tracking-wider uppercase text-slate-300 mt-0.5">Retention Rate</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section id="how-it-works" class="max-w-6xl mx-auto px-6 py-20 sm:py-28">
+    <p class="text-[11px] font-medium tracking-[0.2em] uppercase text-brand-400 mb-3 text-center">How It Works</p>
+    <h2 class="text-3xl sm:text-4xl font-extralight tracking-tight text-slate-900 text-center mb-16">Three steps to fluency</h2>
+
+    <div class="grid sm:grid-cols-3 gap-8">
+      <div class="text-center group">
+        <div class="w-14 h-14 mx-auto mb-5 rounded-2xl bg-brand-50 flex items-center justify-center group-hover:bg-brand-100 transition-colors">
+          <i class="fa-solid fa-crosshairs text-xl text-brand-400"></i>
+        </div>
+        <h3 class="text-base font-light text-slate-900 mb-2">Collect</h3>
+        <p class="text-sm font-extralight text-slate-400 leading-relaxed max-w-xs mx-auto">Encounter a new word? Add it to your collection. From any language, any source, any context.</p>
+      </div>
+
+      <div class="text-center group">
+        <div class="w-14 h-14 mx-auto mb-5 rounded-2xl bg-brand-50 flex items-center justify-center group-hover:bg-brand-100 transition-colors">
+          <i class="fa-solid fa-rotate text-xl text-brand-400"></i>
+        </div>
+        <h3 class="text-base font-light text-slate-900 mb-2">Practice</h3>
+        <p class="text-sm font-extralight text-slate-400 leading-relaxed max-w-xs mx-auto">Flashcards, quizzes, and spaced repetition — tuned to how your brain actually learns.</p>
+      </div>
+
+      <div class="text-center group">
+        <div class="w-14 h-14 mx-auto mb-5 rounded-2xl bg-reward-50 flex items-center justify-center group-hover:bg-reward-100 transition-colors">
+          <i class="fa-solid fa-trophy text-xl text-reward-400"></i>
+        </div>
+        <h3 class="text-base font-light text-slate-900 mb-2">Master</h3>
+        <p class="text-sm font-extralight text-slate-400 leading-relaxed max-w-xs mx-auto">Level up, unlock achievements, and watch your collection grow from common words to legendary finds.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Feature cards -->
+  <section class="bg-slate-50/40 border-y border-slate-100">
+    <div class="max-w-6xl mx-auto px-6 py-20 sm:py-28">
+      <p class="text-[11px] font-medium tracking-[0.2em] uppercase text-brand-400 mb-3">Features</p>
+      <h2 class="text-3xl font-extralight tracking-tight text-slate-900 mb-12">Built for collectors</h2>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="bg-white rounded-xl border border-slate-100 p-6 hover:border-brand-200 transition-all hover:shadow-sm group">
+          <i class="fa-solid fa-layer-group text-lg text-brand-300 mb-4 block group-hover:text-brand-400 transition-colors"></i>
+          <h3 class="text-sm font-light text-slate-900 mb-1.5">Rarity Tiers</h3>
+          <p class="text-xs font-extralight text-slate-400 leading-relaxed">Words earn rarity from Common to Legendary based on frequency and difficulty. Gotta catch 'em all.</p>
+        </div>
+
+        <div class="bg-white rounded-xl border border-slate-100 p-6 hover:border-brand-200 transition-all hover:shadow-sm group">
+          <i class="fa-solid fa-fire text-lg text-brand-300 mb-4 block group-hover:text-brand-400 transition-colors"></i>
+          <h3 class="text-sm font-light text-slate-900 mb-1.5">Streaks & XP</h3>
+          <p class="text-xs font-extralight text-slate-400 leading-relaxed">Daily practice builds streaks. Every action earns XP. Level up and unlock new milestones.</p>
+        </div>
+
+        <div class="bg-white rounded-xl border border-slate-100 p-6 hover:border-brand-200 transition-all hover:shadow-sm group">
+          <i class="fa-solid fa-earth-americas text-lg text-brand-300 mb-4 block group-hover:text-brand-400 transition-colors"></i>
+          <h3 class="text-sm font-light text-slate-900 mb-1.5">Any Language</h3>
+          <p class="text-xs font-extralight text-slate-400 leading-relaxed">Japanese, Spanish, Korean, Swahili — collect words from any language you're learning.</p>
+        </div>
+
+        <div class="bg-white rounded-xl border border-slate-100 p-6 hover:border-brand-200 transition-all hover:shadow-sm group">
+          <i class="fa-solid fa-brain text-lg text-brand-300 mb-4 block group-hover:text-brand-400 transition-colors"></i>
+          <h3 class="text-sm font-light text-slate-900 mb-1.5">Spaced Repetition</h3>
+          <p class="text-xs font-extralight text-slate-400 leading-relaxed">Smart review scheduling so you practice words right before you'd forget them.</p>
+        </div>
+
+        <div class="bg-white rounded-xl border border-slate-100 p-6 hover:border-brand-200 transition-all hover:shadow-sm group">
+          <i class="fa-solid fa-medal text-lg text-brand-300 mb-4 block group-hover:text-brand-400 transition-colors"></i>
+          <h3 class="text-sm font-light text-slate-900 mb-1.5">Achievements</h3>
+          <p class="text-xs font-extralight text-slate-400 leading-relaxed">Unlock badges for milestones — first streak, polyglot status, legendary finds, and more.</p>
+        </div>
+
+        <div class="bg-white rounded-xl border border-slate-100 p-6 hover:border-brand-200 transition-all hover:shadow-sm group">
+          <i class="fa-solid fa-chart-line text-lg text-brand-300 mb-4 block group-hover:text-brand-400 transition-colors"></i>
+          <h3 class="text-sm font-light text-slate-900 mb-1.5">Progress Tracking</h3>
+          <p class="text-xs font-extralight text-slate-400 leading-relaxed">Detailed stats on your collection, mastery rates, and learning velocity over time.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="max-w-6xl mx-auto px-6 py-20 sm:py-28 text-center">
+    <h2 class="text-3xl sm:text-4xl font-extralight tracking-tight text-slate-900 mb-4">Ready to start collecting?</h2>
+    <p class="text-base font-extralight text-slate-400 mb-8 max-w-md mx-auto">Join thousands of language learners building their word collections. Free to start, rewarding to continue.</p>
+    <%= link_to new_user_registration_path, class: "btn-gradient inline-flex items-center gap-2 px-7 py-3 bg-gradient-to-r from-brand-500 to-brand-600 text-white text-sm font-light rounded-lg" do %>
+      <i class="fa-solid fa-plus text-xs opacity-70"></i>
+      Create Your Collection
+    <% end %>
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-slate-100 py-8">
+    <div class="max-w-6xl mx-auto px-6 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <div class="w-5 h-5 rounded bg-brand-500 flex items-center justify-center text-white">
+          <%= render "shared/dragon_icon", size: "sm" %>
+        </div>
+        <span class="text-sm font-extralight text-slate-400">WordHoard</span>
+      </div>
+      <p class="text-[11px] font-light text-slate-300">Every word you learn is a word you keep.</p>
+    </div>
+  </footer>
+
+</div>

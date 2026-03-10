@@ -1,0 +1,839 @@
+<div class="min-h-screen bg-white font-body">
+
+  <!-- ==================== HEADER / NAV ==================== -->
+  <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-slate-100">
+    <div class="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <div class="w-7 h-7 rounded-lg bg-brand-500 flex items-center justify-center text-white">
+          <%= render "shared/dragon_icon", size: "md" %>
+        </div>
+        <span class="text-lg font-extralight tracking-tight text-slate-900">WordHoard</span>
+      </div>
+      <nav class="hidden sm:flex items-center gap-8">
+        <a href="#" class="text-[13px] font-light text-slate-400 hover:text-slate-900 transition-colors">Dashboard</a>
+        <a href="#" class="text-[13px] font-light text-slate-900 transition-colors">Collection</a>
+        <a href="#" class="text-[13px] font-light text-slate-400 hover:text-slate-900 transition-colors">Practice</a>
+        <a href="#" class="text-[13px] font-light text-slate-400 hover:text-slate-900 transition-colors">Progress</a>
+      </nav>
+      <div class="flex items-center gap-3">
+        <div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-reward-50 border border-reward-200">
+          <svg class="w-3.5 h-3.5 text-reward-500" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1.323l3.954 1.582 1.599-.8a1 1 0 01.894 1.79l-1.233.616 1.738 5.42a1 1 0 01-.285 1.05A3.989 3.989 0 0115 15a3.989 3.989 0 01-2.667-1.019 1 1 0 01-.285-1.05l1.715-5.349L11 6.477V16h2a1 1 0 110 2H7a1 1 0 110-2h2V6.477L6.237 7.582l1.715 5.349a1 1 0 01-.285 1.05A3.989 3.989 0 015 15a3.989 3.989 0 01-2.667-1.019 1 1 0 01-.285-1.05l1.738-5.42-1.233-.617a1 1 0 01.894-1.789l1.599.799L9 4.323V3a1 1 0 011-1z"/></svg>
+          <span class="text-xs font-medium text-reward-600">2,450 XP</span>
+        </div>
+        <div class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center">
+          <span class="text-xs font-medium text-slate-500">EL</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== HERO ==================== -->
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-brand-50 via-white to-reward-50/30"></div>
+    <div class="relative max-w-6xl mx-auto px-6 py-20 sm:py-28">
+      <p class="text-[11px] font-medium tracking-[0.2em] uppercase text-brand-400 mb-4">Your Word Collection</p>
+      <h1 class="text-5xl sm:text-6xl font-extralight tracking-tight text-slate-900 leading-[1.1] max-w-2xl">
+        Collect words.<br/>
+        <span class="text-brand-500">Own languages.</span>
+      </h1>
+      <p class="mt-6 text-lg font-extralight text-slate-400 max-w-md leading-relaxed">
+        Every word you learn is a word you keep. Build your collection, track your mastery, level up.
+      </p>
+      <div class="mt-8 flex gap-3">
+        <button class="btn-gradient px-6 py-2.5 bg-gradient-to-r from-brand-500 to-brand-600 text-white text-sm font-light rounded-lg">
+          <i class="fa-solid fa-plus mr-2 text-xs"></i>Start Collecting
+        </button>
+        <button class="btn-lift px-5 py-2.5 bg-white text-slate-600 text-sm font-light rounded-lg border border-slate-200 hover:border-slate-300 hover:text-slate-900">
+          <i class="fa-regular fa-compass mr-2 text-xs"></i>Browse Words
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== STATS DASHBOARD ==================== -->
+  <section class="max-w-6xl mx-auto px-6 -mt-2 mb-12">
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+      <!-- Streak -->
+      <div class="group bg-white rounded-xl border border-slate-100 p-5 hover:border-brand-200 transition-all hover:shadow-sm">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-[11px] font-medium tracking-wider uppercase text-slate-300">Streak</span>
+          <div class="animate-pulse-subtle">
+            <svg class="w-5 h-5 text-reward-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03zM12.12 15.12A3 3 0 017 13s.879.5 2.5.5c0-1 .5-4 1.25-4.5.5 1 .786 1.293 1.371 1.879A2.99 2.99 0 0113 13a2.99 2.99 0 01-.879 2.121z" clip-rule="evenodd"/></svg>
+          </div>
+        </div>
+        <div class="flex items-baseline gap-1">
+          <span class="text-3xl font-extralight text-slate-900 animate-count">14</span>
+          <span class="text-sm font-light text-slate-300">days</span>
+        </div>
+      </div>
+
+      <!-- Words Collected -->
+      <div class="group bg-white rounded-xl border border-slate-100 p-5 hover:border-brand-200 transition-all hover:shadow-sm">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-[11px] font-medium tracking-wider uppercase text-slate-300">Collected</span>
+          <svg class="w-5 h-5 text-brand-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" /></svg>
+        </div>
+        <div class="flex items-baseline gap-1">
+          <span class="text-3xl font-extralight text-slate-900 animate-count">247</span>
+          <span class="text-sm font-light text-slate-300">words</span>
+        </div>
+      </div>
+
+      <!-- Mastered -->
+      <div class="group bg-white rounded-xl border border-slate-100 p-5 hover:border-brand-200 transition-all hover:shadow-sm">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-[11px] font-medium tracking-wider uppercase text-slate-300">Mastered</span>
+          <svg class="w-5 h-5 text-xp-green" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" /></svg>
+        </div>
+        <div class="flex items-baseline gap-1">
+          <span class="text-3xl font-extralight text-slate-900 animate-count">83</span>
+          <span class="text-sm font-light text-slate-300">words</span>
+        </div>
+      </div>
+
+      <!-- Level -->
+      <div class="group bg-white rounded-xl border border-slate-100 p-5 hover:border-reward-200 transition-all hover:shadow-sm">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-[11px] font-medium tracking-wider uppercase text-slate-300">Level</span>
+          <svg class="w-5 h-5 text-reward-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" /></svg>
+        </div>
+        <div class="flex items-baseline gap-1">
+          <span class="text-3xl font-extralight text-slate-900 animate-count">12</span>
+          <span class="text-sm font-light text-slate-300">collector</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== XP PROGRESS BAR ==================== -->
+  <section class="max-w-6xl mx-auto px-6 mb-16">
+    <div class="flex items-center justify-between mb-2">
+      <div class="flex items-center gap-2">
+        <span class="text-xs font-light text-slate-400">Level 12</span>
+        <span class="text-[10px] text-slate-300">&rarr;</span>
+        <span class="text-xs font-light text-slate-400">Level 13</span>
+      </div>
+      <span class="text-xs font-mono font-light text-slate-300">2,450 / 3,000 XP</span>
+    </div>
+    <div class="h-2 bg-slate-50 rounded-full overflow-hidden border border-slate-100">
+      <div class="h-full bg-gradient-to-r from-brand-400 to-brand-500 rounded-full animate-fill relative" style="width: 81.6%">
+        <div class="absolute inset-0 shimmer rounded-full"></div>
+      </div>
+    </div>
+    <div class="mt-2 flex justify-end">
+      <span class="text-[10px] font-light text-slate-300">550 XP to next level</span>
+    </div>
+  </section>
+
+  <!-- ==================== SECTION: DAILY GOALS (CHECKLIST) ==================== -->
+  <section class="max-w-6xl mx-auto px-6 mb-16">
+    <div class="flex items-center justify-between mb-6">
+      <h2 class="text-xl font-extralight text-slate-900 tracking-tight">Today's Goals</h2>
+      <span class="text-xs font-light text-slate-300">3 of 5 complete</span>
+    </div>
+
+    <div class="space-y-2">
+      <!-- Completed -->
+      <div class="flex items-center gap-4 px-4 py-3 bg-xp-green-light/40 rounded-lg border border-xp-green/10 group">
+        <div class="relative">
+          <div class="w-6 h-6 rounded-full bg-xp-green flex items-center justify-center check-pop">
+            <svg class="w-3.5 h-3.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+          </div>
+          <div class="absolute inset-0 w-6 h-6 rounded-full border-2 border-xp-green check-ring"></div>
+        </div>
+        <span class="text-sm font-light text-slate-400 line-through">Learn 5 new words</span>
+        <span class="ml-auto text-[10px] font-mono text-xp-green">+50 XP</span>
+      </div>
+
+      <!-- Completed -->
+      <div class="flex items-center gap-4 px-4 py-3 bg-xp-green-light/40 rounded-lg border border-xp-green/10">
+        <div class="relative">
+          <div class="w-6 h-6 rounded-full bg-xp-green flex items-center justify-center check-pop">
+            <svg class="w-3.5 h-3.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+          </div>
+        </div>
+        <span class="text-sm font-light text-slate-400 line-through">Review 10 flashcards</span>
+        <span class="ml-auto text-[10px] font-mono text-xp-green">+30 XP</span>
+      </div>
+
+      <!-- Completed -->
+      <div class="flex items-center gap-4 px-4 py-3 bg-xp-green-light/40 rounded-lg border border-xp-green/10">
+        <div class="relative">
+          <div class="w-6 h-6 rounded-full bg-xp-green flex items-center justify-center check-pop">
+            <svg class="w-3.5 h-3.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+          </div>
+        </div>
+        <span class="text-sm font-light text-slate-400 line-through">Practice pronunciation</span>
+        <span class="ml-auto text-[10px] font-mono text-xp-green">+20 XP</span>
+      </div>
+
+      <!-- Incomplete -->
+      <div class="flex items-center gap-4 px-4 py-3 bg-white rounded-lg border border-slate-100 hover:border-brand-200 transition-all cursor-pointer group">
+        <div class="w-6 h-6 rounded-full border-2 border-slate-200 group-hover:border-brand-300 transition-colors"></div>
+        <span class="text-sm font-light text-slate-600">Complete a quiz</span>
+        <span class="ml-auto text-[10px] font-mono text-slate-300">+40 XP</span>
+      </div>
+
+      <!-- Incomplete -->
+      <div class="flex items-center gap-4 px-4 py-3 bg-white rounded-lg border border-slate-100 hover:border-brand-200 transition-all cursor-pointer group">
+        <div class="w-6 h-6 rounded-full border-2 border-slate-200 group-hover:border-brand-300 transition-colors"></div>
+        <span class="text-sm font-light text-slate-600">Add a word from reading</span>
+        <span class="ml-auto text-[10px] font-mono text-slate-300">+25 XP</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FLASHCARDS ==================== -->
+  <section class="max-w-6xl mx-auto px-6 mb-16">
+    <div class="flex items-center justify-between mb-6">
+      <h2 class="text-xl font-extralight text-slate-900 tracking-tight">Word Collection</h2>
+      <div class="flex items-center gap-2">
+        <span class="text-[10px] font-medium tracking-wider uppercase text-slate-300">Filter by</span>
+        <select class="text-xs font-light text-slate-500 bg-white border border-slate-150 rounded-md px-2 py-1 focus:outline-none focus:ring-1 focus:ring-brand-300 appearance-none cursor-pointer">
+          <option>All Languages</option>
+          <option>Japanese</option>
+          <option>Spanish</option>
+          <option>Korean</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+
+      <!-- Common word -->
+      <div class="flip-card h-44 cursor-pointer">
+        <div class="flip-card-inner relative w-full h-full">
+          <div class="flip-card-front absolute inset-0 bg-white rounded-xl border border-slate-100 p-5 flex flex-col justify-between hover:border-slate-200 transition-colors">
+            <div class="flex items-center justify-between">
+              <span class="text-[9px] font-medium tracking-widest uppercase text-rarity-common/60 px-1.5 py-0.5 rounded bg-slate-50">Common</span>
+              <span class="text-[10px] font-light text-slate-300">JP</span>
+            </div>
+            <div class="text-center">
+              <p class="text-2xl font-extralight text-slate-800">食べる</p>
+              <p class="text-[10px] font-mono text-slate-300 mt-1">taberu</p>
+            </div>
+            <div class="flex items-center justify-between">
+              <div class="flex gap-0.5">
+                <div class="w-1.5 h-1.5 rounded-full bg-xp-green"></div>
+                <div class="w-1.5 h-1.5 rounded-full bg-xp-green"></div>
+                <div class="w-1.5 h-1.5 rounded-full bg-xp-green"></div>
+                <div class="w-1.5 h-1.5 rounded-full bg-slate-200"></div>
+                <div class="w-1.5 h-1.5 rounded-full bg-slate-200"></div>
+              </div>
+              <span class="text-[10px] font-light text-slate-300">Hover to flip</span>
+            </div>
+          </div>
+          <div class="flip-card-back absolute inset-0 bg-brand-500 rounded-xl p-5 flex flex-col justify-between">
+            <div class="flex items-center justify-between">
+              <span class="text-[9px] font-medium tracking-widest uppercase text-white/50">Definition</span>
+              <span class="text-[10px] font-light text-white/40">Verb</span>
+            </div>
+            <div class="text-center">
+              <p class="text-xl font-extralight text-white">to eat</p>
+              <p class="text-xs font-extralight text-white/50 mt-2">"I eat sushi every Friday"</p>
+            </div>
+            <div class="text-center">
+              <span class="text-[10px] font-light text-white/40">Collected 3 days ago</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Uncommon word -->
+      <div class="flip-card h-44 cursor-pointer">
+        <div class="flip-card-inner relative w-full h-full">
+          <div class="flip-card-front absolute inset-0 bg-white rounded-xl border border-slate-100 p-5 flex flex-col justify-between hover:border-rarity-uncommon/30 transition-colors">
+            <div class="flex items-center justify-between">
+              <span class="text-[9px] font-medium tracking-widest uppercase text-rarity-uncommon px-1.5 py-0.5 rounded bg-emerald-50">Uncommon</span>
+              <span class="text-[10px] font-light text-slate-300">ES</span>
+            </div>
+            <div class="text-center">
+              <p class="text-2xl font-extralight text-slate-800">madrugada</p>
+            </div>
+            <div class="flex items-center justify-between">
+              <div class="flex gap-0.5">
+                <div class="w-1.5 h-1.5 rounded-full bg-xp-green"></div>
+                <div class="w-1.5 h-1.5 rounded-full bg-xp-green"></div>
+                <div class="w-1.5 h-1.5 rounded-full bg-slate-200"></div>
+                <div class="w-1.5 h-1.5 rounded-full bg-slate-200"></div>
+                <div class="w-1.5 h-1.5 rounded-full bg-slate-200"></div>
+              </div>
+              <span class="text-[10px] font-light text-slate-300">Hover to flip</span>
+            </div>
+          </div>
+          <div class="flip-card-back absolute inset-0 bg-rarity-uncommon rounded-xl p-5 flex flex-col justify-between">
+            <span class="text-[9px] font-medium tracking-widest uppercase text-white/50">Definition</span>
+            <div class="text-center">
+              <p class="text-xl font-extralight text-white">early morning / dawn</p>
+              <p class="text-xs font-extralight text-white/50 mt-2">"the quiet hours before sunrise"</p>
+            </div>
+            <span class="text-[10px] font-light text-white/40 text-center">Collected 1 week ago</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Rare word -->
+      <div class="flip-card h-44 cursor-pointer">
+        <div class="flip-card-inner relative w-full h-full">
+          <div class="flip-card-front absolute inset-0 bg-white rounded-xl border border-slate-100 p-5 flex flex-col justify-between hover:border-brand-200 transition-colors">
+            <div class="flex items-center justify-between">
+              <span class="text-[9px] font-medium tracking-widest uppercase text-rarity-rare px-1.5 py-0.5 rounded bg-brand-50">Rare</span>
+              <span class="text-[10px] font-light text-slate-300">KR</span>
+            </div>
+            <div class="text-center">
+              <p class="text-2xl font-extralight text-slate-800">설레다</p>
+              <p class="text-[10px] font-mono text-slate-300 mt-1">seolleda</p>
+            </div>
+            <div class="flex items-center justify-between">
+              <div class="flex gap-0.5">
+                <div class="w-1.5 h-1.5 rounded-full bg-xp-green"></div>
+                <div class="w-1.5 h-1.5 rounded-full bg-slate-200"></div>
+                <div class="w-1.5 h-1.5 rounded-full bg-slate-200"></div>
+                <div class="w-1.5 h-1.5 rounded-full bg-slate-200"></div>
+                <div class="w-1.5 h-1.5 rounded-full bg-slate-200"></div>
+              </div>
+              <span class="text-[10px] font-light text-slate-300">Hover to flip</span>
+            </div>
+          </div>
+          <div class="flip-card-back absolute inset-0 bg-rarity-rare rounded-xl p-5 flex flex-col justify-between">
+            <span class="text-[9px] font-medium tracking-widest uppercase text-white/50">Definition</span>
+            <div class="text-center">
+              <p class="text-xl font-extralight text-white">to flutter with excitement</p>
+              <p class="text-xs font-extralight text-white/50 mt-2">"a heart full of anticipation"</p>
+            </div>
+            <span class="text-[10px] font-light text-white/40 text-center">Collected 2 weeks ago</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Legendary word -->
+      <div class="flip-card h-44 cursor-pointer">
+        <div class="flip-card-inner relative w-full h-full">
+          <div class="flip-card-front absolute inset-0 bg-white rounded-xl border-2 border-reward-200 animate-legendary p-5 flex flex-col justify-between animate-glow">
+            <div class="flex items-center justify-between">
+              <span class="text-[9px] font-bold tracking-widest uppercase text-rarity-legendary px-1.5 py-0.5 rounded bg-reward-50">Legendary</span>
+              <span class="text-[10px] font-light text-slate-300">JP</span>
+            </div>
+            <div class="text-center">
+              <p class="text-2xl font-extralight text-slate-800">木漏れ日</p>
+              <p class="text-[10px] font-mono text-slate-300 mt-1">komorebi</p>
+            </div>
+            <div class="flex items-center justify-between">
+              <div class="flex gap-0.5">
+                <div class="w-1.5 h-1.5 rounded-full bg-reward-400"></div>
+                <div class="w-1.5 h-1.5 rounded-full bg-reward-400"></div>
+                <div class="w-1.5 h-1.5 rounded-full bg-reward-400"></div>
+                <div class="w-1.5 h-1.5 rounded-full bg-reward-400"></div>
+                <div class="w-1.5 h-1.5 rounded-full bg-reward-400"></div>
+              </div>
+              <span class="text-[10px] font-light text-reward-400">Mastered!</span>
+            </div>
+          </div>
+          <div class="flip-card-back absolute inset-0 bg-gradient-to-br from-reward-500 to-reward-600 rounded-xl p-5 flex flex-col justify-between">
+            <span class="text-[9px] font-medium tracking-widest uppercase text-white/50">Definition</span>
+            <div class="text-center">
+              <p class="text-xl font-extralight text-white">sunlight filtering through leaves</p>
+              <p class="text-xs font-extralight text-white/50 mt-2">"untranslatable beauty"</p>
+            </div>
+            <span class="text-[10px] font-light text-white/40 text-center">A truly rare find</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== COLLECTION PROGRESS ==================== -->
+  <section class="max-w-6xl mx-auto px-6 mb-16">
+    <h2 class="text-xl font-extralight text-slate-900 tracking-tight mb-6">Collection Progress</h2>
+    <div class="grid grid-cols-2 sm:grid-cols-5 gap-3">
+      <div class="bg-white rounded-xl border border-slate-100 p-4 text-center">
+        <div class="w-10 h-10 rounded-full bg-slate-50 border border-slate-100 mx-auto mb-2 flex items-center justify-center">
+          <span class="text-xs font-mono text-rarity-common">142</span>
+        </div>
+        <p class="text-[10px] font-medium tracking-wider uppercase text-slate-300">Common</p>
+        <div class="mt-2 h-1 bg-slate-50 rounded-full overflow-hidden">
+          <div class="h-full bg-slate-300 rounded-full" style="width: 57%"></div>
+        </div>
+      </div>
+      <div class="bg-white rounded-xl border border-slate-100 p-4 text-center">
+        <div class="w-10 h-10 rounded-full bg-emerald-50 border border-emerald-100 mx-auto mb-2 flex items-center justify-center">
+          <span class="text-xs font-mono text-rarity-uncommon">63</span>
+        </div>
+        <p class="text-[10px] font-medium tracking-wider uppercase text-slate-300">Uncommon</p>
+        <div class="mt-2 h-1 bg-slate-50 rounded-full overflow-hidden">
+          <div class="h-full bg-rarity-uncommon rounded-full" style="width: 42%"></div>
+        </div>
+      </div>
+      <div class="bg-white rounded-xl border border-slate-100 p-4 text-center">
+        <div class="w-10 h-10 rounded-full bg-brand-50 border border-brand-100 mx-auto mb-2 flex items-center justify-center">
+          <span class="text-xs font-mono text-rarity-rare">28</span>
+        </div>
+        <p class="text-[10px] font-medium tracking-wider uppercase text-slate-300">Rare</p>
+        <div class="mt-2 h-1 bg-slate-50 rounded-full overflow-hidden">
+          <div class="h-full bg-rarity-rare rounded-full" style="width: 28%"></div>
+        </div>
+      </div>
+      <div class="bg-white rounded-xl border border-slate-100 p-4 text-center">
+        <div class="w-10 h-10 rounded-full bg-purple-50 border border-purple-100 mx-auto mb-2 flex items-center justify-center">
+          <span class="text-xs font-mono text-rarity-epic">11</span>
+        </div>
+        <p class="text-[10px] font-medium tracking-wider uppercase text-slate-300">Epic</p>
+        <div class="mt-2 h-1 bg-slate-50 rounded-full overflow-hidden">
+          <div class="h-full bg-rarity-epic rounded-full" style="width: 15%"></div>
+        </div>
+      </div>
+      <div class="bg-white rounded-xl border border-reward-100 p-4 text-center">
+        <div class="w-10 h-10 rounded-full bg-reward-50 border border-reward-200 mx-auto mb-2 flex items-center justify-center animate-glow">
+          <span class="text-xs font-mono text-rarity-legendary">3</span>
+        </div>
+        <p class="text-[10px] font-medium tracking-wider uppercase text-reward-400">Legendary</p>
+        <div class="mt-2 h-1 bg-reward-50 rounded-full overflow-hidden">
+          <div class="h-full bg-rarity-legendary rounded-full" style="width: 5%"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== WEEKLY ACTIVITY CHART ==================== -->
+  <section class="max-w-6xl mx-auto px-6 mb-16">
+    <div class="flex items-center justify-between mb-6">
+      <h2 class="text-xl font-extralight text-slate-900 tracking-tight">Weekly Activity</h2>
+      <div class="flex gap-4 text-[10px] font-light text-slate-300">
+        <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-sm bg-brand-400"></span> Learned</span>
+        <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-sm bg-brand-200"></span> Reviewed</span>
+      </div>
+    </div>
+    <div class="bg-white rounded-xl border border-slate-100 p-6">
+      <div class="flex items-end justify-between gap-2 h-36">
+        <% [
+          { day: "Mon", learned: 45, reviewed: 70 },
+          { day: "Tue", learned: 60, reviewed: 55 },
+          { day: "Wed", learned: 30, reviewed: 80 },
+          { day: "Thu", learned: 80, reviewed: 65 },
+          { day: "Fri", learned: 55, reviewed: 90 },
+          { day: "Sat", learned: 95, reviewed: 45 },
+          { day: "Sun", learned: 40, reviewed: 30 },
+        ].each do |d| %>
+          <div class="flex-1 flex flex-col items-center gap-1">
+            <div class="w-full flex flex-col items-center gap-0.5" style="height: 120px; justify-content: flex-end;">
+              <div class="w-full max-w-[28px] bg-brand-400 rounded-t-sm animate-fill" style="height: <%= d[:learned] %>%"></div>
+              <div class="w-full max-w-[28px] bg-brand-200 rounded-b-sm animate-fill" style="height: <%= d[:reviewed] * 0.6 %>%"></div>
+            </div>
+            <span class="text-[10px] font-light text-slate-300 mt-1"><%= d[:day] %></span>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== VOCABULARY TABLE ==================== -->
+  <section class="max-w-6xl mx-auto px-6 mb-16">
+    <div class="flex items-center justify-between mb-6">
+      <h2 class="text-xl font-extralight text-slate-900 tracking-tight">Recent Words</h2>
+      <button class="group text-xs font-light text-brand-500 hover:text-brand-600 transition-colors inline-flex items-center gap-1.5">View all <i class="fa-solid fa-arrow-right text-[9px] opacity-60 group-hover:translate-x-0.5 transition-transform"></i></button>
+    </div>
+    <div class="bg-white rounded-xl border border-slate-100 overflow-hidden">
+      <table class="w-full">
+        <thead>
+          <tr class="border-b border-slate-50">
+            <th class="text-left text-[10px] font-medium tracking-wider uppercase text-slate-300 px-5 py-3">Word</th>
+            <th class="text-left text-[10px] font-medium tracking-wider uppercase text-slate-300 px-5 py-3">Translation</th>
+            <th class="text-left text-[10px] font-medium tracking-wider uppercase text-slate-300 px-5 py-3 hidden sm:table-cell">Language</th>
+            <th class="text-left text-[10px] font-medium tracking-wider uppercase text-slate-300 px-5 py-3 hidden sm:table-cell">Rarity</th>
+            <th class="text-left text-[10px] font-medium tracking-wider uppercase text-slate-300 px-5 py-3">Mastery</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-50">
+          <tr class="hover:bg-slate-50/50 transition-colors cursor-pointer group">
+            <td class="px-5 py-3.5">
+              <span class="text-sm font-light text-slate-800">食べる</span>
+              <span class="text-[10px] font-mono text-slate-300 ml-1.5">taberu</span>
+            </td>
+            <td class="px-5 py-3.5 text-sm font-extralight text-slate-500">to eat</td>
+            <td class="px-5 py-3.5 hidden sm:table-cell">
+              <span class="text-[10px] font-medium tracking-wider text-slate-400 bg-slate-50 px-2 py-0.5 rounded">JA</span>
+            </td>
+            <td class="px-5 py-3.5 hidden sm:table-cell">
+              <span class="text-[9px] font-medium tracking-widest uppercase text-rarity-common">Common</span>
+            </td>
+            <td class="px-5 py-3.5">
+              <div class="flex gap-0.5">
+                <div class="w-4 h-1 rounded-full bg-xp-green"></div>
+                <div class="w-4 h-1 rounded-full bg-xp-green"></div>
+                <div class="w-4 h-1 rounded-full bg-xp-green"></div>
+                <div class="w-4 h-1 rounded-full bg-slate-100"></div>
+                <div class="w-4 h-1 rounded-full bg-slate-100"></div>
+              </div>
+            </td>
+          </tr>
+          <tr class="hover:bg-slate-50/50 transition-colors cursor-pointer">
+            <td class="px-5 py-3.5">
+              <span class="text-sm font-light text-slate-800">madrugada</span>
+            </td>
+            <td class="px-5 py-3.5 text-sm font-extralight text-slate-500">early morning</td>
+            <td class="px-5 py-3.5 hidden sm:table-cell">
+              <span class="text-[10px] font-medium tracking-wider text-slate-400 bg-slate-50 px-2 py-0.5 rounded">ES</span>
+            </td>
+            <td class="px-5 py-3.5 hidden sm:table-cell">
+              <span class="text-[9px] font-medium tracking-widest uppercase text-rarity-uncommon">Uncommon</span>
+            </td>
+            <td class="px-5 py-3.5">
+              <div class="flex gap-0.5">
+                <div class="w-4 h-1 rounded-full bg-xp-green"></div>
+                <div class="w-4 h-1 rounded-full bg-xp-green"></div>
+                <div class="w-4 h-1 rounded-full bg-slate-100"></div>
+                <div class="w-4 h-1 rounded-full bg-slate-100"></div>
+                <div class="w-4 h-1 rounded-full bg-slate-100"></div>
+              </div>
+            </td>
+          </tr>
+          <tr class="hover:bg-slate-50/50 transition-colors cursor-pointer">
+            <td class="px-5 py-3.5">
+              <span class="text-sm font-light text-slate-800">설레다</span>
+              <span class="text-[10px] font-mono text-slate-300 ml-1.5">seolleda</span>
+            </td>
+            <td class="px-5 py-3.5 text-sm font-extralight text-slate-500">to flutter with excitement</td>
+            <td class="px-5 py-3.5 hidden sm:table-cell">
+              <span class="text-[10px] font-medium tracking-wider text-slate-400 bg-slate-50 px-2 py-0.5 rounded">KO</span>
+            </td>
+            <td class="px-5 py-3.5 hidden sm:table-cell">
+              <span class="text-[9px] font-medium tracking-widest uppercase text-rarity-rare">Rare</span>
+            </td>
+            <td class="px-5 py-3.5">
+              <div class="flex gap-0.5">
+                <div class="w-4 h-1 rounded-full bg-xp-green"></div>
+                <div class="w-4 h-1 rounded-full bg-slate-100"></div>
+                <div class="w-4 h-1 rounded-full bg-slate-100"></div>
+                <div class="w-4 h-1 rounded-full bg-slate-100"></div>
+                <div class="w-4 h-1 rounded-full bg-slate-100"></div>
+              </div>
+            </td>
+          </tr>
+          <tr class="hover:bg-slate-50/50 transition-colors cursor-pointer">
+            <td class="px-5 py-3.5">
+              <span class="text-sm font-light text-slate-800">Wanderlust</span>
+            </td>
+            <td class="px-5 py-3.5 text-sm font-extralight text-slate-500">desire to travel</td>
+            <td class="px-5 py-3.5 hidden sm:table-cell">
+              <span class="text-[10px] font-medium tracking-wider text-slate-400 bg-slate-50 px-2 py-0.5 rounded">DE</span>
+            </td>
+            <td class="px-5 py-3.5 hidden sm:table-cell">
+              <span class="text-[9px] font-medium tracking-widest uppercase text-rarity-epic">Epic</span>
+            </td>
+            <td class="px-5 py-3.5">
+              <div class="flex gap-0.5">
+                <div class="w-4 h-1 rounded-full bg-xp-green"></div>
+                <div class="w-4 h-1 rounded-full bg-xp-green"></div>
+                <div class="w-4 h-1 rounded-full bg-xp-green"></div>
+                <div class="w-4 h-1 rounded-full bg-xp-green"></div>
+                <div class="w-4 h-1 rounded-full bg-slate-100"></div>
+              </div>
+            </td>
+          </tr>
+          <tr class="hover:bg-slate-50/50 transition-colors cursor-pointer">
+            <td class="px-5 py-3.5">
+              <span class="text-sm font-light text-slate-800">木漏れ日</span>
+              <span class="text-[10px] font-mono text-slate-300 ml-1.5">komorebi</span>
+            </td>
+            <td class="px-5 py-3.5 text-sm font-extralight text-slate-500">sunlight through leaves</td>
+            <td class="px-5 py-3.5 hidden sm:table-cell">
+              <span class="text-[10px] font-medium tracking-wider text-slate-400 bg-slate-50 px-2 py-0.5 rounded">JA</span>
+            </td>
+            <td class="px-5 py-3.5 hidden sm:table-cell">
+              <span class="text-[9px] font-bold tracking-widest uppercase text-rarity-legendary">Legendary</span>
+            </td>
+            <td class="px-5 py-3.5">
+              <div class="flex gap-0.5">
+                <div class="w-4 h-1 rounded-full bg-reward-400"></div>
+                <div class="w-4 h-1 rounded-full bg-reward-400"></div>
+                <div class="w-4 h-1 rounded-full bg-reward-400"></div>
+                <div class="w-4 h-1 rounded-full bg-reward-400"></div>
+                <div class="w-4 h-1 rounded-full bg-reward-400"></div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ==================== ACHIEVEMENTS / BADGES ==================== -->
+  <section class="max-w-6xl mx-auto px-6 mb-16">
+    <div class="flex items-center justify-between mb-6">
+      <h2 class="text-xl font-extralight text-slate-900 tracking-tight">Achievements</h2>
+      <span class="text-xs font-light text-slate-300">7 of 24 unlocked</span>
+    </div>
+    <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-3">
+      <!-- Unlocked -->
+      <div class="bg-white rounded-xl border border-slate-100 p-4 text-center group hover:border-brand-200 transition-all hover:shadow-sm">
+        <div class="w-12 h-12 mx-auto mb-2 rounded-full bg-gradient-to-br from-orange-50 to-red-50 flex items-center justify-center">
+          <i class="fa-solid fa-fire text-lg text-orange-400/80"></i>
+        </div>
+        <p class="text-[11px] font-light text-slate-700">First Streak</p>
+        <p class="text-[9px] font-light text-slate-300 mt-0.5">7 day streak</p>
+      </div>
+
+      <div class="bg-white rounded-xl border border-slate-100 p-4 text-center group hover:border-brand-200 transition-all hover:shadow-sm">
+        <div class="w-12 h-12 mx-auto mb-2 rounded-full bg-gradient-to-br from-brand-50 to-indigo-50 flex items-center justify-center">
+          <i class="fa-solid fa-book-open text-lg text-brand-400"></i>
+        </div>
+        <p class="text-[11px] font-light text-slate-700">Bookworm</p>
+        <p class="text-[9px] font-light text-slate-300 mt-0.5">100 words</p>
+      </div>
+
+      <div class="bg-white rounded-xl border border-slate-100 p-4 text-center group hover:border-brand-200 transition-all hover:shadow-sm">
+        <div class="w-12 h-12 mx-auto mb-2 rounded-full bg-gradient-to-br from-teal-50 to-cyan-50 flex items-center justify-center">
+          <i class="fa-solid fa-earth-americas text-lg text-teal-400/80"></i>
+        </div>
+        <p class="text-[11px] font-light text-slate-700">Polyglot</p>
+        <p class="text-[9px] font-light text-slate-300 mt-0.5">3 languages</p>
+      </div>
+
+      <div class="bg-white rounded-xl border border-reward-200 p-4 text-center animate-glow">
+        <div class="w-12 h-12 mx-auto mb-2 rounded-full bg-gradient-to-br from-reward-50 to-amber-50 flex items-center justify-center">
+          <i class="fa-solid fa-gem text-lg text-reward-400"></i>
+        </div>
+        <p class="text-[11px] font-light text-reward-600">Legendary Find</p>
+        <p class="text-[9px] font-light text-reward-400 mt-0.5">First legendary</p>
+      </div>
+
+      <!-- Locked -->
+      <div class="bg-slate-50/50 rounded-xl border border-slate-100 p-4 text-center opacity-40">
+        <div class="w-12 h-12 mx-auto mb-2 rounded-full bg-slate-100 flex items-center justify-center">
+          <i class="fa-solid fa-lock text-sm text-slate-300"></i>
+        </div>
+        <p class="text-[11px] font-light text-slate-400">Speed Demon</p>
+        <p class="text-[9px] font-light text-slate-300 mt-0.5">50 words in a day</p>
+      </div>
+
+      <div class="bg-slate-50/50 rounded-xl border border-slate-100 p-4 text-center opacity-40">
+        <div class="w-12 h-12 mx-auto mb-2 rounded-full bg-slate-100 flex items-center justify-center">
+          <i class="fa-solid fa-lock text-sm text-slate-300"></i>
+        </div>
+        <p class="text-[11px] font-light text-slate-400">Perfectionist</p>
+        <p class="text-[9px] font-light text-slate-300 mt-0.5">100% quiz score</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FLASH MESSAGES ==================== -->
+  <section class="max-w-6xl mx-auto px-6 mb-16">
+    <h2 class="text-xl font-extralight text-slate-900 tracking-tight mb-6">Notifications & Alerts</h2>
+    <div class="space-y-3">
+      <!-- Success -->
+      <div class="flex items-center gap-3 px-4 py-3 bg-xp-green-light/30 rounded-lg border border-xp-green/10">
+        <div class="w-5 h-5 rounded-full bg-xp-green flex items-center justify-center shrink-0">
+          <i class="fa-solid fa-check text-[9px] text-white"></i>
+        </div>
+        <p class="text-sm font-light text-slate-600">New word collected! <span class="font-mono text-xs text-xp-green">+15 XP</span></p>
+      </div>
+
+      <!-- Info -->
+      <div class="flex items-center gap-3 px-4 py-3 bg-brand-50/50 rounded-lg border border-brand-100/50">
+        <div class="w-5 h-5 rounded-full bg-brand-400 flex items-center justify-center shrink-0">
+          <i class="fa-solid fa-info text-[9px] text-white"></i>
+        </div>
+        <p class="text-sm font-light text-slate-600">You have 12 words due for review today.</p>
+      </div>
+
+      <!-- Warning -->
+      <div class="flex items-center gap-3 px-4 py-3 bg-reward-50/50 rounded-lg border border-reward-200/50">
+        <div class="w-5 h-5 rounded-full bg-reward-400 flex items-center justify-center shrink-0">
+          <i class="fa-solid fa-exclamation text-[9px] text-white"></i>
+        </div>
+        <p class="text-sm font-light text-slate-600">Your streak is about to end! Practice now to keep it alive.</p>
+      </div>
+
+      <!-- Level up -->
+      <div class="flex items-center gap-3 px-4 py-3 bg-gradient-to-r from-brand-50 to-reward-50 rounded-lg border border-brand-100/30">
+        <div class="w-5 h-5 rounded-full bg-gradient-to-br from-brand-400 to-reward-400 flex items-center justify-center shrink-0">
+          <i class="fa-solid fa-star text-[9px] text-white"></i>
+        </div>
+        <p class="text-sm font-light text-slate-600">Level up! You're now <span class="font-medium text-brand-500">Level 12 — Collector</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== TYPOGRAPHY REFERENCE ==================== -->
+  <section class="max-w-6xl mx-auto px-6 mb-16">
+    <h2 class="text-xl font-extralight text-slate-900 tracking-tight mb-6">Typography</h2>
+    <div class="bg-white rounded-xl border border-slate-100 p-8 space-y-8">
+
+      <div>
+        <span class="text-[9px] font-medium tracking-widest uppercase text-slate-300 block mb-2">Display / Hero</span>
+        <h1 class="text-5xl font-extralight tracking-tight text-slate-900">The quick brown fox</h1>
+      </div>
+
+      <div>
+        <span class="text-[9px] font-medium tracking-widest uppercase text-slate-300 block mb-2">Heading 1</span>
+        <h1 class="text-3xl font-extralight tracking-tight text-slate-900">Page heading with thin weight</h1>
+      </div>
+
+      <div>
+        <span class="text-[9px] font-medium tracking-widest uppercase text-slate-300 block mb-2">Heading 2</span>
+        <h2 class="text-xl font-extralight tracking-tight text-slate-900">Section heading for content areas</h2>
+      </div>
+
+      <div>
+        <span class="text-[9px] font-medium tracking-widest uppercase text-slate-300 block mb-2">Heading 3</span>
+        <h3 class="text-base font-light text-slate-900">Subsection heading</h3>
+      </div>
+
+      <div>
+        <span class="text-[9px] font-medium tracking-widest uppercase text-slate-300 block mb-2">Label</span>
+        <p class="text-[11px] font-medium tracking-[0.15em] uppercase text-slate-400">Uppercase label text</p>
+      </div>
+
+      <div>
+        <span class="text-[9px] font-medium tracking-widest uppercase text-slate-300 block mb-2">Body</span>
+        <p class="text-sm font-light text-slate-600 max-w-lg leading-relaxed">Body text uses a light weight for a clean, airy feel. It should be easy to read in long-form content while maintaining the minimal aesthetic. Every word you learn is a word you keep forever.</p>
+      </div>
+
+      <div>
+        <span class="text-[9px] font-medium tracking-widest uppercase text-slate-300 block mb-2">Caption / Meta</span>
+        <p class="text-xs font-light text-slate-400">Small supporting text for timestamps, metadata, and secondary information.</p>
+      </div>
+
+      <div>
+        <span class="text-[9px] font-medium tracking-widest uppercase text-slate-300 block mb-2">Mono</span>
+        <p class="text-sm font-mono font-light text-slate-500">font-mono for counts, XP, and data: 2,450 XP</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== BUTTONS ==================== -->
+  <section class="max-w-6xl mx-auto px-6 mb-16">
+    <h2 class="text-xl font-extralight text-slate-900 tracking-tight mb-6">Buttons</h2>
+    <div class="bg-white rounded-xl border border-slate-100 p-8 space-y-8">
+
+      <div>
+        <span class="text-[9px] font-medium tracking-widest uppercase text-slate-300 block mb-4">Variants</span>
+        <div class="flex flex-wrap gap-3 items-center">
+          <button class="btn-gradient px-5 py-2.5 bg-gradient-to-r from-brand-500 to-brand-600 text-white text-sm font-light rounded-lg">
+            <i class="fa-solid fa-plus mr-2 text-[10px] opacity-70"></i>Primary
+          </button>
+          <button class="btn-lift px-5 py-2.5 bg-white text-slate-600 text-sm font-light rounded-lg border border-slate-200 hover:border-slate-300 hover:text-slate-900">
+            <i class="fa-regular fa-square mr-2 text-[10px] opacity-50"></i>Secondary
+          </button>
+          <button class="btn-press px-5 py-2.5 text-brand-500 text-sm font-light rounded-lg hover:bg-brand-50 transition-colors">
+            <i class="fa-regular fa-hand-pointer mr-2 text-[10px] opacity-60"></i>Ghost
+          </button>
+          <button class="btn-lift px-5 py-2.5 bg-xp-green text-white text-sm font-light rounded-lg hover:brightness-[0.97]">
+            <i class="fa-solid fa-check mr-2 text-[10px] opacity-70"></i>Success
+          </button>
+          <button class="btn-lift px-5 py-2.5 bg-gradient-to-r from-reward-400 to-reward-500 text-white text-sm font-light rounded-lg hover:brightness-[0.97]">
+            <i class="fa-solid fa-trophy mr-2 text-[10px] opacity-70"></i>Reward
+          </button>
+          <button class="px-5 py-2.5 bg-slate-50 text-slate-300 text-sm font-light rounded-lg cursor-not-allowed border border-slate-100">
+            Disabled
+          </button>
+        </div>
+      </div>
+
+      <div>
+        <span class="text-[9px] font-medium tracking-widest uppercase text-slate-300 block mb-4">Sizes</span>
+        <div class="flex flex-wrap gap-3 items-center">
+          <button class="btn-gradient px-3 py-1.5 bg-gradient-to-r from-brand-500 to-brand-600 text-white text-xs font-light rounded-md">
+            Small
+          </button>
+          <button class="btn-gradient px-5 py-2.5 bg-gradient-to-r from-brand-500 to-brand-600 text-white text-sm font-light rounded-lg">
+            Default
+          </button>
+          <button class="btn-gradient px-7 py-3 bg-gradient-to-r from-brand-500 to-brand-600 text-white text-base font-light rounded-lg">
+            Large
+          </button>
+        </div>
+      </div>
+
+      <div>
+        <span class="text-[9px] font-medium tracking-widest uppercase text-slate-300 block mb-4">Icon Buttons</span>
+        <div class="flex flex-wrap gap-3 items-center">
+          <button class="btn-lift w-9 h-9 bg-white border border-slate-200 rounded-lg flex items-center justify-center text-slate-400 hover:text-brand-500 hover:border-brand-200">
+            <i class="fa-solid fa-heart text-sm"></i>
+          </button>
+          <button class="btn-lift w-9 h-9 bg-white border border-slate-200 rounded-lg flex items-center justify-center text-slate-400 hover:text-brand-500 hover:border-brand-200">
+            <i class="fa-solid fa-bookmark text-sm"></i>
+          </button>
+          <button class="btn-lift w-9 h-9 bg-white border border-slate-200 rounded-lg flex items-center justify-center text-slate-400 hover:text-brand-500 hover:border-brand-200">
+            <i class="fa-solid fa-share-nodes text-sm"></i>
+          </button>
+          <button class="btn-press w-9 h-9 bg-brand-500 rounded-lg flex items-center justify-center text-white hover:bg-brand-600 transition-colors">
+            <i class="fa-solid fa-plus text-sm"></i>
+          </button>
+          <button class="btn-press w-9 h-9 bg-xp-green rounded-lg flex items-center justify-center text-white">
+            <i class="fa-solid fa-play text-xs"></i>
+          </button>
+          <button class="btn-lift w-9 h-9 bg-white border border-slate-200 rounded-lg flex items-center justify-center text-slate-400 hover:text-red-400 hover:border-red-200">
+            <i class="fa-regular fa-trash-can text-sm"></i>
+          </button>
+        </div>
+      </div>
+
+      <div>
+        <span class="text-[9px] font-medium tracking-widest uppercase text-slate-300 block mb-4">Contextual</span>
+        <div class="flex flex-wrap gap-3 items-center">
+          <button class="btn-gradient group px-5 py-2.5 bg-gradient-to-r from-brand-500 to-brand-600 text-white text-sm font-light rounded-lg inline-flex items-center gap-2">
+            Add to Collection
+            <i class="fa-solid fa-arrow-right text-[10px] opacity-60 group-hover:translate-x-0.5 transition-transform"></i>
+          </button>
+          <button class="btn-lift px-5 py-2.5 bg-white text-xp-green text-sm font-light rounded-lg border border-xp-green/20 hover:bg-xp-green-light/30 inline-flex items-center gap-2">
+            <i class="fa-solid fa-rotate text-[10px]"></i>
+            Review Now
+          </button>
+          <button class="btn-lift group px-5 py-2.5 bg-gradient-to-r from-reward-50 to-white text-reward-500 text-sm font-light rounded-lg border border-reward-200/50 hover:border-reward-300/60 inline-flex items-center gap-2">
+            <i class="fa-solid fa-bolt text-[10px]"></i>
+            Claim Reward
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== FORM ELEMENTS ==================== -->
+  <section class="max-w-6xl mx-auto px-6 mb-16">
+    <h2 class="text-xl font-extralight text-slate-900 tracking-tight mb-6">Form Elements</h2>
+    <div class="bg-white rounded-xl border border-slate-100 p-8 max-w-md space-y-5">
+      <div>
+        <label class="text-[11px] font-medium tracking-wider uppercase text-slate-400 block mb-1.5">Word</label>
+        <input type="text" value="木漏れ日" class="w-full px-3.5 py-2 text-sm font-light text-slate-800 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-200 focus:border-brand-300 transition-all" />
+      </div>
+      <div>
+        <label class="text-[11px] font-medium tracking-wider uppercase text-slate-400 block mb-1.5">Translation</label>
+        <input type="text" placeholder="Enter translation..." class="w-full px-3.5 py-2 text-sm font-light text-slate-800 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-200 focus:border-brand-300 transition-all placeholder:text-slate-300" />
+      </div>
+      <div>
+        <label class="text-[11px] font-medium tracking-wider uppercase text-slate-400 block mb-1.5">Language</label>
+        <select class="w-full px-3.5 py-2 text-sm font-light text-slate-600 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-200 focus:border-brand-300 transition-all appearance-none cursor-pointer">
+          <option>Japanese</option>
+          <option>Spanish</option>
+          <option>Korean</option>
+          <option>German</option>
+        </select>
+      </div>
+      <div>
+        <label class="text-[11px] font-medium tracking-wider uppercase text-slate-400 block mb-1.5">Notes</label>
+        <textarea rows="3" placeholder="Add context or example sentences..." class="w-full px-3.5 py-2 text-sm font-light text-slate-800 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-200 focus:border-brand-300 transition-all placeholder:text-slate-300 resize-none"></textarea>
+      </div>
+      <button class="btn-gradient w-full px-5 py-2.5 bg-gradient-to-r from-brand-500 to-brand-600 text-white text-sm font-light rounded-lg inline-flex items-center justify-center gap-2">
+        <i class="fa-solid fa-plus text-[10px] opacity-70"></i>
+        Add to Collection
+      </button>
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="border-t border-slate-100 py-8">
+    <div class="max-w-6xl mx-auto px-6 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <div class="w-5 h-5 rounded bg-brand-500 flex items-center justify-center text-white">
+          <%= render "shared/dragon_icon", size: "sm" %>
+        </div>
+        <span class="text-sm font-extralight text-slate-400">WordHoard</span>
+      </div>
+      <p class="text-[11px] font-light text-slate-300">Every word you learn is a word you keep.</p>
+    </div>
+  </footer>
+
+</div>

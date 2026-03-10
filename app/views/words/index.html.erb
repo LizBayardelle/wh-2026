@@ -1,0 +1,115 @@
+<div class="min-h-screen bg-white font-body" data-controller="word-modal">
+
+  <%= render "shared/nav" %>
+
+  <div class="max-w-6xl mx-auto px-6 py-12">
+
+    <!-- Header -->
+    <div class="flex items-center justify-between mb-8">
+      <div>
+        <p class="text-[11px] font-medium tracking-[0.2em] uppercase text-brand-400 mb-2">Your Collection</p>
+        <h1 class="text-3xl font-extralight tracking-tight text-slate-900">Words</h1>
+      </div>
+      <% if @languages.any? %>
+        <button data-action="click->word-modal#openNew" class="btn-gradient px-5 py-2.5 bg-gradient-to-r from-brand-500 to-brand-600 text-white text-sm font-light rounded-lg inline-flex items-center gap-2">
+          <i class="fa-solid fa-plus text-[10px] opacity-70"></i>
+          Add Word
+        </button>
+      <% end %>
+    </div>
+
+    <% if @languages.empty? %>
+      <!-- Empty state: no languages -->
+      <div class="text-center py-20">
+        <div class="w-16 h-16 mx-auto mb-5 rounded-2xl bg-brand-50 flex items-center justify-center">
+          <i class="fa-solid fa-earth-americas text-2xl text-brand-300"></i>
+        </div>
+        <h2 class="text-lg font-extralight text-slate-900 mb-2">No languages yet</h2>
+        <p class="text-sm font-extralight text-slate-400 mb-6 max-w-sm mx-auto">Add a language first, then start collecting words.</p>
+        <%= link_to languages_path, class: "btn-gradient inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-brand-500 to-brand-600 text-white text-sm font-light rounded-lg" do %>
+          <i class="fa-solid fa-plus text-[10px] opacity-70"></i>
+          Add a Language
+        <% end %>
+      </div>
+
+    <% else %>
+      <% show_flag = (@active_language_id == "all") %>
+
+      <!-- Language tabs -->
+      <div class="border-b border-slate-100 mb-6">
+        <div class="flex gap-4 sm:gap-6 -mb-px overflow-x-auto">
+          <% all_count = current_user.words.count %>
+          <%= link_to words_path(words_page_params("language_id" => nil, "page" => 1)),
+                class: "pb-3 text-sm font-light border-b-2 transition-colors whitespace-nowrap
+                       #{show_flag ? 'text-slate-900 border-brand-500' : 'text-slate-400 border-transparent hover:text-slate-600'}" do %>
+            All
+            <% if all_count > 0 %>
+              <span class="ml-1.5 text-[10px] font-mono text-slate-300"><%= all_count %></span>
+            <% end %>
+          <% end %>
+          <% @languages.each do |lang| %>
+            <% count = current_user.words.where(language_id: lang.id).count %>
+            <%= link_to words_path(words_page_params("language_id" => lang.id, "page" => 1)),
+                  class: "pb-3 text-sm font-light border-b-2 transition-colors whitespace-nowrap inline-flex items-center gap-1.5
+                         #{lang.id.to_s == @active_language_id.to_s ? 'text-slate-900 border-brand-500' : 'text-slate-400 border-transparent hover:text-slate-600'}" do %>
+              <span class="text-sm"><%= flag_emoji(lang) %></span>
+              <%= lang.name %>
+              <% if count > 0 %>
+                <span class="ml-0.5 text-[10px] font-mono text-slate-300"><%= count %></span>
+              <% end %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+
+      <% if @words.empty? %>
+        <div class="text-center py-16">
+          <div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-slate-50 flex items-center justify-center">
+            <i class="fa-regular fa-folder-open text-xl text-slate-300"></i>
+          </div>
+          <h3 class="text-base font-extralight text-slate-700 mb-1">No words yet</h3>
+          <p class="text-xs font-light text-slate-400 mb-5">Start building your collection.</p>
+          <button data-action="click->word-modal#openNew" class="btn-gradient inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-brand-500 to-brand-600 text-white text-sm font-light rounded-lg">
+            <i class="fa-solid fa-plus text-[10px] opacity-70"></i>
+            Add Your First Word
+          </button>
+        </div>
+      <% else %>
+        <!-- Words table -->
+        <div class="bg-white rounded-xl border border-slate-100 overflow-hidden">
+          <table class="w-full">
+            <thead>
+              <tr class="border-b border-slate-50">
+                <% if show_flag %>
+                  <th class="pl-5 pr-1 py-3 w-10"></th>
+                <% end %>
+                <th class="text-left px-5 py-3"><%= sort_link("Term", "term", @sort, @dir) %></th>
+                <th class="text-left px-5 py-3"><%= sort_link("Translation", "translation", @sort, @dir) %></th>
+                <th class="text-left px-5 py-3 hidden sm:table-cell"><%= sort_link("Type", "type", @sort, @dir) %></th>
+                <th class="text-left px-5 py-3 hidden lg:table-cell"><span class="text-[10px] font-medium tracking-wider uppercase text-slate-300">Stashes</span></th>
+                <th class="text-left px-5 py-3 hidden sm:table-cell"><%= sort_link("Reviewed", "reviewed", @sort, @dir) %></th>
+                <th class="text-left px-5 py-3 hidden sm:table-cell"><%= sort_link("Accuracy", "accuracy", @sort, @dir) %></th>
+                <th class="text-right px-5 py-3 w-20"></th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-50">
+              <% @words.each do |word| %>
+                <%= render "words/word_row", word: word, show_flag: show_flag %>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+
+        <%= render "words/pagination" %>
+      <% end %>
+
+    <% end %>
+
+  </div>
+
+  <!-- Modal -->
+  <% if @languages.any? %>
+    <%= render "words/modal" %>
+  <% end %>
+
+</div>

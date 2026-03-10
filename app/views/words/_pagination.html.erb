@@ -1,0 +1,42 @@
+<div class="mt-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+  <!-- Left: count + per page -->
+  <div class="flex items-center gap-4">
+    <p class="text-[10px] font-light text-slate-400">
+      <%= (@page - 1) * @per_page + 1 %>–<%= [@page * @per_page, @total_count].min %> of <%= @total_count %> word<%= @total_count == 1 ? '' : 's' %>
+    </p>
+    <div class="flex items-center gap-1">
+      <% [10, 25, 50, 100].each do |n| %>
+        <%= link_to n, words_path(words_page_params("per_page" => n, "page" => 1)),
+              class: "px-2 py-0.5 rounded text-[10px] font-light transition-colors #{@per_page == n ? 'bg-brand-500 text-white' : 'text-slate-400 hover:bg-slate-100 hover:text-slate-600'}" %>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Right: page nav -->
+  <% if @total_pages > 1 %>
+    <div class="flex items-center gap-1">
+      <% if @page > 1 %>
+        <%= link_to words_path(words_page_params("page" => @page - 1)),
+              class: "w-7 h-7 rounded-md flex items-center justify-center text-slate-400 hover:bg-slate-100 hover:text-slate-600 transition-colors" do %>
+          <i class="fa-solid fa-chevron-left text-[9px]"></i>
+        <% end %>
+      <% end %>
+
+      <% page_window(page: @page, total: @total_pages).each do |p| %>
+        <% if p == :gap %>
+          <span class="text-[10px] text-slate-300 px-1">...</span>
+        <% else %>
+          <%= link_to p, words_path(words_page_params("page" => p)),
+                class: "w-7 h-7 rounded-md flex items-center justify-center text-[11px] font-light transition-colors #{p == @page ? 'bg-brand-500 text-white' : 'text-slate-400 hover:bg-slate-100 hover:text-slate-600'}" %>
+        <% end %>
+      <% end %>
+
+      <% if @page < @total_pages %>
+        <%= link_to words_path(words_page_params("page" => @page + 1)),
+              class: "w-7 h-7 rounded-md flex items-center justify-center text-slate-400 hover:bg-slate-100 hover:text-slate-600 transition-colors" do %>
+          <i class="fa-solid fa-chevron-right text-[9px]"></i>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

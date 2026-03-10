@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for(:title) || "WordHoard" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="WordHoard">
+    <meta name="mobile-web-app-capable" content="yes">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= yield :head %>
+
+    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
+    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+
+    <%# Includes all stylesheet files in app/assets/stylesheets %>
+    <%= stylesheet_link_tag :app %>
+    <%= javascript_include_tag "application", type: "module" %>
+  </head>
+
+  <body>
+    <% if notice %>
+      <div class="w-full bg-xp-green-light/40 border-b border-xp-green/10" role="status">
+        <div class="max-w-6xl mx-auto px-6 py-3 flex items-center gap-3">
+          <div class="w-5 h-5 rounded-full bg-xp-green flex items-center justify-center shrink-0">
+            <i class="fa-solid fa-check text-[9px] text-white"></i>
+          </div>
+          <p class="text-sm font-light text-slate-600"><%= notice %></p>
+        </div>
+      </div>
+    <% end %>
+    <% if alert %>
+      <div class="w-full bg-red-50/50 border-b border-red-100/50" role="alert">
+        <div class="max-w-6xl mx-auto px-6 py-3 flex items-center gap-3">
+          <div class="w-5 h-5 rounded-full bg-red-400 flex items-center justify-center shrink-0">
+            <i class="fa-solid fa-exclamation text-[9px] text-white"></i>
+          </div>
+          <p class="text-sm font-light text-slate-600"><%= alert %></p>
+        </div>
+      </div>
+    <% end %>
+
+    <%= yield %>
+  </body>
+</html>

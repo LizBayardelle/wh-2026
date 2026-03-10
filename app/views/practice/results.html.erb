@@ -1,0 +1,60 @@
+<div class="min-h-screen bg-white font-body">
+
+  <%= render "shared/nav" %>
+
+  <div class="max-w-md mx-auto px-6 py-16 text-center">
+
+    <% best_pct = [@session.accuracy, @session.total_accuracy].max %>
+
+    <!-- Result icon -->
+    <div class="w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-5 sm:mb-6 rounded-2xl flex items-center justify-center
+                <%= best_pct >= 80 ? 'bg-xp-green-light' : best_pct >= 50 ? 'bg-reward-50' : 'bg-red-50' %>">
+      <i class="text-2xl sm:text-3xl
+                <%= best_pct >= 80 ? 'fa-solid fa-trophy text-xp-green' : best_pct >= 50 ? 'fa-solid fa-star text-reward-400' : 'fa-solid fa-rotate text-red-400' %>"></i>
+    </div>
+
+    <h1 class="text-2xl sm:text-3xl font-extralight tracking-tight text-slate-900 mb-2">
+      <%= best_pct >= 80 ? 'Legendary!' : best_pct >= 50 ? 'Nice work!' : 'Keep going!' %>
+    </h1>
+    <p class="text-sm font-extralight text-slate-400 mb-8"><%= @session.label %></p>
+
+    <!-- Stats -->
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-10">
+      <div class="bg-slate-50/50 rounded-xl py-3 sm:py-4">
+        <p class="text-xl sm:text-2xl font-extralight <%= @session.accuracy >= 80 ? 'text-xp-green' : @session.accuracy >= 50 ? 'text-reward-500' : 'text-red-400' %>"><%= @session.accuracy %>%</p>
+        <p class="text-[9px] sm:text-[10px] font-medium tracking-wider uppercase text-slate-300 mt-1">First Try</p>
+      </div>
+      <div class="bg-slate-50/50 rounded-xl py-3 sm:py-4">
+        <p class="text-xl sm:text-2xl font-extralight <%= @session.total_accuracy >= 80 ? 'text-xp-green' : @session.total_accuracy >= 50 ? 'text-reward-500' : 'text-red-400' %>"><%= @session.total_accuracy %>%</p>
+        <p class="text-[9px] sm:text-[10px] font-medium tracking-wider uppercase text-slate-300 mt-1">Session</p>
+      </div>
+      <div class="bg-slate-50/50 rounded-xl py-3 sm:py-4">
+        <p class="text-xl sm:text-2xl font-extralight text-slate-900"><%= @session.words_seen %>/<%= @session.total_words %></p>
+        <p class="text-[9px] sm:text-[10px] font-medium tracking-wider uppercase text-slate-300 mt-1">Words</p>
+      </div>
+      <div class="bg-slate-50/50 rounded-xl py-3 sm:py-4">
+        <p class="text-xl sm:text-2xl font-extralight text-slate-900"><%= @session.duration_seconds ? "#{@session.duration_seconds / 60}:#{('%02d' % (@session.duration_seconds % 60))}" : "—" %></p>
+        <p class="text-[9px] sm:text-[10px] font-medium tracking-wider uppercase text-slate-300 mt-1">Time</p>
+      </div>
+    </div>
+
+    <div class="flex items-center justify-center gap-3">
+      <%= link_to practice_index_path, class: "btn-lift inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 bg-white text-slate-600 text-sm font-light rounded-lg border border-slate-200 hover:border-slate-300" do %>
+        <i class="fa-solid fa-arrow-left text-[10px] opacity-50"></i>
+        Practice Homepage
+      <% end %>
+      <% if @session.stash_id %>
+        <%= button_to practice_index_path(stash_id: @session.stash_id), method: :post, class: "btn-gradient inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 bg-gradient-to-r from-brand-500 to-brand-600 text-white text-sm font-light rounded-lg" do %>
+          <i class="fa-solid fa-rotate text-[10px] opacity-70"></i>
+          Again
+        <% end %>
+      <% elsif @session.language_id %>
+        <%= button_to practice_index_path(language_id: @session.language_id), method: :post, class: "btn-gradient inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 bg-gradient-to-r from-brand-500 to-brand-600 text-white text-sm font-light rounded-lg" do %>
+          <i class="fa-solid fa-rotate text-[10px] opacity-70"></i>
+          Again
+        <% end %>
+      <% end %>
+    </div>
+
+  </div>
+</div>

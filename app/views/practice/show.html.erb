@@ -1,0 +1,11 @@
+<div class="min-h-screen bg-white font-body">
+  <div id="practice-root"
+       data-session="<%= @session_json %>"
+       data-words="<%= @words_json %>"
+       data-csrf="<%= form_authenticity_token %>"
+       data-practice-url="<%= practice_path(@session) %>"
+       data-attempts-url="<%= practice_attempts_path(@session) %>"
+       data-complete-url="<%= complete_practice_path(@session) %>"
+       data-back-url="<%= practice_index_path %>">
+  </div>
+</div>

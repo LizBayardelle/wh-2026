@@ -1,0 +1,213 @@
+<!-- Word new/edit modal -->
+<div data-word-modal-target="overlay"
+     data-action="click->word-modal#backdropClose keydown@window->word-modal#keydown"
+     class="fixed inset-0 z-50 hidden opacity-0 transition-opacity duration-200"
+     style="background: rgba(15, 23, 42, 0.3); backdrop-filter: blur(4px);">
+
+  <div class="flex items-start justify-center min-h-screen px-4 pt-12 sm:pt-20 pb-8">
+    <div data-word-modal-target="panel"
+         class="w-full max-w-xl bg-white rounded-2xl border border-slate-100 shadow-xl transform transition-all duration-200 opacity-0 scale-95">
+
+      <!-- Header -->
+      <div class="flex items-center justify-between px-6 py-4">
+        <h3 data-word-modal-target="title" class="text-lg font-extralight tracking-tight text-slate-900">Add Word</h3>
+        <button data-action="click->word-modal#close" class="w-7 h-7 rounded-lg flex items-center justify-center text-slate-300 hover:text-slate-500 hover:bg-slate-50 transition-all">
+          <i class="fa-solid fa-xmark text-sm"></i>
+        </button>
+      </div>
+
+      <!-- Form -->
+      <form data-word-modal-target="form" data-create-url="<%= words_path %>" action="<%= words_path %>" method="post">
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+        <input type="hidden" name="_method" value="post" data-word-modal-target="methodField">
+        <input type="hidden" name="return_to_language" value="<%= @active_language_id %>">
+
+        <div class="px-6 pb-5 space-y-5 max-h-[75vh] overflow-y-auto">
+
+          <!-- Language badges -->
+          <% if @languages.any? %>
+            <% if @languages.size == 1 || @active_language_id != "all" %>
+              <% default_lang_id = (@active_language_id == "all" ? @languages.first.id : @active_language_id.to_i) %>
+            <% else %>
+              <% default_lang_id = nil %>
+            <% end %>
+            <div>
+              <input type="hidden" name="word[language_id]" data-word-modal-target="languageId" data-initial-value="<%= default_lang_id %>" value="<%= default_lang_id %>">
+              <!-- Language warning -->
+              <div data-word-modal-target="languageWarning" class="hidden flex items-center gap-2 px-3 py-2 mb-2 text-xs font-light text-amber-600 bg-amber-50 border border-amber-200 rounded-lg">
+                <i class="fa-solid fa-triangle-exclamation text-[10px]"></i>
+                Please select a language before saving.
+              </div>
+              <div class="flex flex-wrap gap-2" data-word-modal-target="languageBadges">
+                <% @languages.each do |lang| %>
+                  <button type="button"
+                          data-action="click->word-modal#selectLanguage"
+                          data-lang-id="<%= lang.id %>"
+                          class="lang-badge px-3 py-1.5 rounded-full text-xs font-light transition-all cursor-pointer
+                                 <%= lang.id == default_lang_id ? 'bg-brand-500 text-white shadow-sm' : 'bg-slate-50 text-slate-400 hover:bg-slate-100 hover:text-slate-600' %>">
+                    <%= lang.name %>
+                  </button>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+
+          <!-- English meaning — front and center -->
+          <div>
+            <input type="text" name="word[translation]" data-word-modal-target="translation" required
+                   class="w-full px-4 py-3.5 text-xl font-light text-slate-900 bg-slate-50/50 border border-slate-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-200 focus:border-brand-300 focus:bg-white transition-all placeholder:text-slate-300 placeholder:font-extralight"
+                   placeholder="English meaning" />
+          </div>
+
+          <!-- Foreign term + helpers -->
+          <div class="space-y-2">
+            <input type="text" name="word[term]" data-word-modal-target="term" required
+                   class="w-full px-4 py-3.5 text-xl font-light text-slate-900 bg-slate-50/50 border border-slate-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-200 focus:border-brand-300 focus:bg-white transition-all placeholder:text-slate-300 placeholder:font-extralight"
+                   placeholder="Word in target language" />
+            <div class="flex gap-2">
+              <div class="flex-1">
+                <input type="text" name="word[romanization]" data-word-modal-target="romanization"
+                       class="w-full px-3 py-2 text-sm font-light text-slate-600 bg-white border border-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-200 focus:border-brand-300 transition-all placeholder:text-slate-300"
+                       placeholder="Romanization" />
+              </div>
+              <div class="flex-1">
+                <input type="text" name="word[pronunciation]" data-word-modal-target="pronunciation"
+                       class="w-full px-3 py-2 text-sm font-light text-slate-600 bg-white border border-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-200 focus:border-brand-300 transition-all placeholder:text-slate-300"
+                       placeholder="Pronunciation" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Stash input -->
+          <div data-controller="stash-input">
+            <label class="text-[10px] font-medium tracking-wider uppercase text-slate-300 block mb-2">
+              <i class="fa-solid fa-box-archive text-[8px] mr-1"></i>Stashes
+            </label>
+            <div data-stash-input-target="pills" class="flex flex-wrap gap-1.5 mb-2"></div>
+            <div class="relative">
+              <input type="text"
+                     data-stash-input-target="input"
+                     data-action="input->stash-input#onInput keydown->stash-input#onKeydown blur->stash-input#onBlur"
+                     class="w-full px-3 py-2 text-sm font-light text-slate-600 bg-white border border-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-200 focus:border-brand-300 transition-all placeholder:text-slate-300"
+                     placeholder="Type to find or create a stash..." autocomplete="off" />
+              <div data-stash-input-target="dropdown"
+                   class="hidden absolute left-0 right-0 top-full mt-1 bg-white border border-slate-100 rounded-lg shadow-lg z-10 overflow-hidden max-h-48 overflow-y-auto">
+              </div>
+            </div>
+            <input type="hidden" name="stash_names" data-stash-input-target="hidden" data-word-modal-target="stashNames" value="">
+          </div>
+
+          <!-- Quick metadata row -->
+          <div>
+            <label class="text-[10px] font-medium tracking-wider uppercase text-slate-300 block mb-2">
+              <i class="fa-solid fa-tags text-[8px] mr-1"></i>Details
+            </label>
+          <div class="flex flex-wrap gap-2">
+            <select name="word[part_of_speech]" data-word-modal-target="partOfSpeech"
+                    class="px-3 py-1.5 text-xs font-light text-slate-500 bg-slate-50 border border-slate-100 rounded-full focus:outline-none focus:ring-2 focus:ring-brand-200 transition-all appearance-none cursor-pointer">
+              <option value="">Part of speech</option>
+              <% Word::PARTS_OF_SPEECH.each do |pos| %>
+                <option value="<%= pos %>"><%= pos.capitalize %></option>
+              <% end %>
+            </select>
+            <select name="word[formality]" data-word-modal-target="formality"
+                    class="px-3 py-1.5 text-xs font-light text-slate-500 bg-slate-50 border border-slate-100 rounded-full focus:outline-none focus:ring-2 focus:ring-brand-200 transition-all appearance-none cursor-pointer">
+              <option value="">Formality</option>
+              <% Word::FORMALITIES.each do |f| %>
+                <option value="<%= f %>"><%= f.capitalize %></option>
+              <% end %>
+            </select>
+            <select name="word[register]" data-word-modal-target="register"
+                    class="px-3 py-1.5 text-xs font-light text-slate-500 bg-slate-50 border border-slate-100 rounded-full focus:outline-none focus:ring-2 focus:ring-brand-200 transition-all appearance-none cursor-pointer">
+              <option value="">Register</option>
+              <% Word::REGISTERS.each do |r| %>
+                <option value="<%= r %>"><%= r.capitalize %></option>
+              <% end %>
+            </select>
+            <select name="word[gender]" data-word-modal-target="gender"
+                    class="px-3 py-1.5 text-xs font-light text-slate-500 bg-slate-50 border border-slate-100 rounded-full focus:outline-none focus:ring-2 focus:ring-brand-200 transition-all appearance-none cursor-pointer">
+              <option value="">Gender</option>
+              <% Word::GENDERS.each do |g| %>
+                <option value="<%= g %>"><%= g.capitalize %></option>
+              <% end %>
+            </select>
+          </div>
+          </div>
+
+          <!-- Expandable details -->
+          <details data-word-modal-target="details" class="group">
+            <summary class="flex items-center gap-2 cursor-pointer text-[10px] font-medium tracking-wider uppercase text-slate-300 hover:text-slate-400 transition-colors select-none">
+              <i class="fa-solid fa-chevron-right text-[8px] transition-transform group-open:rotate-90"></i>
+              More Details
+            </summary>
+            <div class="mt-4 space-y-3">
+              <div class="flex gap-2">
+                <div class="flex-1">
+                  <label class="text-[10px] font-light text-slate-400 block mb-1">Pitch Accent</label>
+                  <input type="text" name="word[pitch_accent]" data-word-modal-target="pitchAccent"
+                         class="w-full px-2.5 py-1.5 text-xs font-light text-slate-700 bg-white border border-slate-100 rounded-md focus:outline-none focus:ring-1 focus:ring-brand-200 transition-all placeholder:text-slate-300"
+                         placeholder="e.g., 0, LHL" />
+                </div>
+                <div class="flex-1">
+                  <label class="text-[10px] font-light text-slate-400 block mb-1">Plural</label>
+                  <input type="text" name="word[plural]" data-word-modal-target="plural"
+                         class="w-full px-2.5 py-1.5 text-xs font-light text-slate-700 bg-white border border-slate-100 rounded-md focus:outline-none focus:ring-1 focus:ring-brand-200 transition-all placeholder:text-slate-300"
+                         placeholder="Plural form" />
+                </div>
+              </div>
+              <div class="grid grid-cols-2 gap-2">
+                <div>
+                  <label class="text-[10px] font-light text-slate-400 block mb-1">Example Sentence</label>
+                  <textarea name="word[example_sentence]" data-word-modal-target="exampleSentence" rows="2"
+                            class="w-full px-2.5 py-1.5 text-xs font-light text-slate-700 bg-white border border-slate-100 rounded-md focus:outline-none focus:ring-1 focus:ring-brand-200 transition-all placeholder:text-slate-300 resize-none"
+                            placeholder="In target language"></textarea>
+                </div>
+                <div>
+                  <label class="text-[10px] font-light text-slate-400 block mb-1">Example Translation</label>
+                  <textarea name="word[example_translation]" data-word-modal-target="exampleTranslation" rows="2"
+                            class="w-full px-2.5 py-1.5 text-xs font-light text-slate-700 bg-white border border-slate-100 rounded-md focus:outline-none focus:ring-1 focus:ring-brand-200 transition-all placeholder:text-slate-300 resize-none"
+                            placeholder="English translation"></textarea>
+                </div>
+              </div>
+              <div>
+                <label class="text-[10px] font-light text-slate-400 block mb-1">Alternative Translations</label>
+                <input type="text" name="word[alternative_translations]" data-word-modal-target="alternativeTranslations"
+                       class="w-full px-2.5 py-1.5 text-xs font-light text-slate-700 bg-white border border-slate-100 rounded-md focus:outline-none focus:ring-1 focus:ring-brand-200 transition-all placeholder:text-slate-300"
+                       placeholder="Other meanings, comma-separated" />
+              </div>
+              <div>
+                <label class="text-[10px] font-light text-slate-400 block mb-1">Usage Notes</label>
+                <textarea name="word[usage_notes]" data-word-modal-target="usageNotes" rows="2"
+                          class="w-full px-2.5 py-1.5 text-xs font-light text-slate-700 bg-white border border-slate-100 rounded-md focus:outline-none focus:ring-1 focus:ring-brand-200 transition-all placeholder:text-slate-300 resize-none"
+                          placeholder="When or how to use this word"></textarea>
+              </div>
+              <div>
+                <label class="text-[10px] font-light text-slate-400 block mb-1">Notes</label>
+                <textarea name="word[notes]" data-word-modal-target="notes" rows="2"
+                          class="w-full px-2.5 py-1.5 text-xs font-light text-slate-700 bg-white border border-slate-100 rounded-md focus:outline-none focus:ring-1 focus:ring-brand-200 transition-all placeholder:text-slate-300 resize-none"
+                          placeholder="Anything else to remember"></textarea>
+              </div>
+              <div>
+                <label class="text-[10px] font-light text-slate-400 block mb-1">Source</label>
+                <input type="text" name="word[source]" data-word-modal-target="source"
+                       class="w-full px-2.5 py-1.5 text-xs font-light text-slate-700 bg-white border border-slate-100 rounded-md focus:outline-none focus:ring-1 focus:ring-brand-200 transition-all placeholder:text-slate-300"
+                       placeholder="Where you found this word" />
+              </div>
+            </div>
+          </details>
+
+        </div>
+
+        <!-- Actions — sticky at bottom -->
+        <div class="flex items-center justify-end gap-3 px-6 py-4 border-t border-slate-100">
+          <button type="button" data-action="click->word-modal#close" class="px-4 py-2 text-sm font-light text-slate-400 hover:text-slate-600 transition-colors">Cancel</button>
+          <button type="submit" class="btn-gradient px-6 py-2.5 bg-gradient-to-r from-brand-500 to-brand-600 text-white text-sm font-light rounded-lg inline-flex items-center gap-2">
+            <i class="fa-solid fa-check text-[10px] opacity-70"></i>
+            Save
+          </button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
