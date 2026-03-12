@@ -1,4 +1,4 @@
-<header class="sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-slate-100">
+<header class="sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-slate-100" data-controller="mobile-menu">
   <div class="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
     <div class="flex items-center gap-2">
       <%= link_to root_path, class: "flex items-center gap-2" do %>
@@ -10,12 +10,15 @@
     </div>
     <div class="flex items-center gap-6">
       <% if user_signed_in? %>
+        <!-- Desktop nav -->
         <nav class="hidden sm:flex items-center gap-6">
           <%= link_to "Dashboard", root_path, class: "text-[13px] font-light text-slate-400 hover:text-slate-900 transition-colors" %>
           <%= link_to "My Hoard", words_path, class: "text-[13px] font-light #{current_page?(words_path) ? 'text-slate-900' : 'text-slate-400 hover:text-slate-900'} transition-colors" %>
           <%= link_to "Practice", practice_index_path, class: "text-[13px] font-light #{current_page?(practice_index_path) ? 'text-slate-900' : 'text-slate-400 hover:text-slate-900'} transition-colors" %>
         </nav>
-        <div class="relative" data-controller="dropdown">
+
+        <!-- Desktop user dropdown -->
+        <div class="relative hidden sm:block" data-controller="dropdown">
           <button data-action="click->dropdown#toggle" class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center cursor-pointer hover:ring-2 hover:ring-brand-200 transition-all">
             <span class="text-xs font-medium text-slate-500"><%= current_user.first_name&.first&.upcase %><%= current_user.last_name&.first&.upcase %></span>
           </button>
@@ -35,6 +38,11 @@
             <% end %>
           </div>
         </div>
+
+        <!-- Mobile hamburger -->
+        <button data-action="click->mobile-menu#toggle" class="sm:hidden w-8 h-8 rounded-lg flex items-center justify-center text-slate-400 hover:text-slate-900 hover:bg-slate-50 transition-all cursor-pointer" data-mobile-menu-target="button">
+          <i class="fa-solid fa-bars text-sm" data-mobile-menu-target="icon"></i>
+        </button>
       <% else %>
         <%= link_to "Log in", new_user_session_path, class: "text-[13px] font-light text-slate-400 hover:text-slate-900 transition-colors" %>
         <%= link_to new_user_registration_path, class: "btn-gradient px-4 py-1.5 bg-gradient-to-r from-brand-500 to-brand-600 text-white text-[13px] font-light rounded-lg" do %>
@@ -43,4 +51,38 @@
       <% end %>
     </div>
   </div>
+
+  <% if user_signed_in? %>
+    <!-- Mobile menu panel -->
+    <div data-mobile-menu-target="panel" class="hidden sm:hidden border-t border-slate-100 bg-white/95 backdrop-blur-lg">
+      <div class="px-6 py-4 space-y-1">
+        <%= link_to root_path, class: "flex items-center gap-3 px-3 py-2.5 rounded-lg text-[13px] font-light #{current_page?(root_path) ? 'text-slate-900 bg-slate-50' : 'text-slate-500 hover:text-slate-900 hover:bg-slate-50'} transition-colors" do %>
+          <i class="fa-solid fa-house text-[11px] w-4 text-center"></i>
+          Dashboard
+        <% end %>
+        <%= link_to words_path, class: "flex items-center gap-3 px-3 py-2.5 rounded-lg text-[13px] font-light #{current_page?(words_path) ? 'text-slate-900 bg-slate-50' : 'text-slate-500 hover:text-slate-900 hover:bg-slate-50'} transition-colors" do %>
+          <i class="fa-solid fa-book text-[11px] w-4 text-center"></i>
+          My Hoard
+        <% end %>
+        <%= link_to practice_index_path, class: "flex items-center gap-3 px-3 py-2.5 rounded-lg text-[13px] font-light #{current_page?(practice_index_path) ? 'text-slate-900 bg-slate-50' : 'text-slate-500 hover:text-slate-900 hover:bg-slate-50'} transition-colors" do %>
+          <i class="fa-solid fa-graduation-cap text-[11px] w-4 text-center"></i>
+          Practice
+        <% end %>
+        <div class="border-t border-slate-100 my-2"></div>
+        <%= link_to edit_user_registration_path, class: "flex items-center gap-3 px-3 py-2.5 rounded-lg text-[13px] font-light text-slate-500 hover:text-slate-900 hover:bg-slate-50 transition-colors" do %>
+          <i class="fa-regular fa-user text-[11px] w-4 text-center"></i>
+          My Account
+        <% end %>
+        <%= link_to languages_path, class: "flex items-center gap-3 px-3 py-2.5 rounded-lg text-[13px] font-light text-slate-500 hover:text-slate-900 hover:bg-slate-50 transition-colors" do %>
+          <i class="fa-regular fa-flag text-[11px] w-4 text-center"></i>
+          My Languages
+        <% end %>
+        <div class="border-t border-slate-100 my-2"></div>
+        <%= button_to destroy_user_session_path, method: :delete, class: "w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-[13px] font-light text-slate-500 hover:text-red-500 hover:bg-slate-50 transition-colors cursor-pointer" do %>
+          <i class="fa-solid fa-arrow-right-from-bracket text-[11px] w-4 text-center"></i>
+          Sign Out
+        <% end %>
+      </div>
+    </div>
+  <% end %>
 </header>

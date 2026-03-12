@@ -12,6 +12,7 @@ import StashInputController from "./stash_input_controller"
 import StashFilterController from "./stash_filter_controller"
 import SortableController from "./sortable_controller"
 import DropdownController from "./dropdown_controller"
+import MobileMenuController from "./mobile_menu_controller"
 
 application.register("hello", HelloController)
 application.register("modal", ModalController)
@@ -21,3 +22,4 @@ application.register("stash-input", StashInputController)
 application.register("stash-filter", StashFilterController)
 application.register("sortable", SortableController)
 application.register("dropdown", DropdownController)
+application.register("mobile-menu", MobileMenuController)
